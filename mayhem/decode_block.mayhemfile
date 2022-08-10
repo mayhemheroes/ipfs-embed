@@ -1,0 +1,7 @@
+project: ipfs-embed
+target: decode-block
+
+cmds:
+  - cmd: /decode_block
+  - cmd: /decode_block_no_inst @@
+    libfuzzer: false
