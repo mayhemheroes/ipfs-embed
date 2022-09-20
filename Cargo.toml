@@ -42,7 +42,7 @@ thiserror = "1.0.30"
 tide = { version = "0.16.0", optional = true }
 tokio-crate = { package = "tokio", version = "1.17.0", features = ["rt"], optional = true }
 tracing = "0.1.32"
-trust-dns-resolver = "0.20"
+trust-dns-resolver = "0.21"
 void = "1.0.2"
 
 [dependencies.libp2p]
