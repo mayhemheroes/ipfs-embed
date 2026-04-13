@@ -9,8 +9,8 @@ cargo-fuzz = true
 
 [dependencies]
 libfuzzer-sys = "0.4"
-cid = "0.7"
-libipld = { version = "0.12", default-features = false, features = ["dag-cbor", "dag-pb", "dag-json"] }
+cid = "0.8"
+libipld = { version = "0.14", default-features = false, features = ["dag-cbor", "dag-pb", "dag-json"] }
 
 [dependencies.ipfs-embed]
 path = ".."
