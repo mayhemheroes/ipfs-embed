@@ -1,13 +1,19 @@
 # Build Stage
-FROM rustlang/rust:nightly AS builder
+FROM ubuntu:22.04 AS builder
 
-RUN apt-get update && apt-get install -y protobuf-compiler && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    curl build-essential protobuf-compiler \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+    sh -s -- -y --default-toolchain nightly
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+RUN cargo install cargo-fuzz
 
 ## Add source code to the build stage.
 ADD . /src
 WORKDIR /src
-
-RUN cargo install cargo-fuzz
 
 RUN echo building instrumented harnesses && \
     bash -c "pushd fuzz && cargo fuzz build && popd" && \
@@ -21,6 +27,6 @@ RUN echo building non-instrumented harnesses && \
     echo done
 
 # Package Stage
-FROM rustlang/rust:nightly
+FROM ubuntu:22.04
 
 COPY --from=builder /decode_block /decode_block_no_inst /
