@@ -1,0 +1,19 @@
+# Additive behavioral-oracle crate: known-answer tests for the exact code path the
+# decode-block fuzzer drives (ipfs_embed::Block::decode over the libipld codecs).
+# NOT part of the upstream workspace; built by mayhem/build.sh, run by mayhem/test.sh.
+[package]
+name = "ipfs-embed-oracle"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[dependencies]
+ipfs-embed = { path = "../.." }
+cid = "0.8"
+libipld = { version = "0.14", default-features = false, features = ["dag-cbor", "dag-pb", "dag-json"] }
+
+[workspace]
+members = ["."]
+
+[patch.crates-io]
+core2 = { path = "../patches/core2" }

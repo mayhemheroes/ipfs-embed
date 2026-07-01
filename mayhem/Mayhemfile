@@ -1,0 +1,9 @@
+# Mayhem target: drive the ipfs-embed Block decoder over DagCbor / Raw / DagPb / DagJson
+# codecs (libipld). The additive cargo-fuzz harness (mayhem/fuzz/fuzz_targets/decode_block.rs)
+# is built to /mayhem/decode_block by mayhem/build.sh.
+project: ipfs-embed
+target: decode-block
+
+cmds:
+  - cmd: /mayhem/decode_block   # mayhem-lint: ok-image-path (the libFuzzer binary itself)
+    libfuzzer: true
